@@ -1,4 +1,4 @@
-#include <firmware/smbios.hh>
+#include <smbios.hh>
 
 
 namespace firmware
@@ -36,13 +36,13 @@ namespace firmware
 
 			while(*this->_str_start == '\0')
 			{
-				kprintf(" ");
+				printf(" ");
 				this->_str_start++;
 
 			}
 	
 			char c = *this->_str_start++;
-			_kprintf("%c", c);
+			_printf("%c", c);
 		}
 	}
 

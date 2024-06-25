@@ -3,14 +3,21 @@
 
 #include <string.h>
 #include <stdint.h>
-#include <library/kprint.hh>
-#include <library/type_traits.hh>
+
 
 
 #define START_ADDR 				0x000F0000
 #define END_ADDR 				0x000FFFFF
 
-
+template<typename T>
+void _printf(const char *format, T args...)
+{
+	// buraya kendi printf nizi implemente edin
+}
+void printf(const char *str)
+{
+	_printf("%s", str);
+}
 namespace firmware
 {
 
@@ -23,13 +30,7 @@ namespace firmware
 		System_Enclosure      =3,
 		Processor_Information =4, 
 		Cache_Information     =7,
-		System_Slots	      =9,
-		Physical_Memory_Arr   =16,
-		Memory_Device         =17 ,
-		Memory_Array          =19,
-		Memory_Dev_Map_Addr   =20,
-		System_Boot_Infor     =32,
-
+		
 
 		inactive	      =126,
 		End_of_Table          =127
