@@ -4,7 +4,8 @@
 #ifndef FIRMWRAE_SM_BIOS
 #define FIRMWRAE_SM_BIOS
 
-#include <string.h>
+// bunu g++ derleyicisi kendisi sağlar
+// bu başlık dosyası için endişe etmenize gerek yok
 #include <stdint.h>
 
 
