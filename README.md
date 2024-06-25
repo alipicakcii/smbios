@@ -21,7 +21,7 @@ smbios.print_string();
 
 
 current_struct = smbios.next_structure();
-auto *system_info = static_cast<BiosInformation*>(current_struct);
+auto *system_info = static_cast<SystemInformation*>(current_struct);
 printf("type %d\n", system_info->header.type);
 .
 .
