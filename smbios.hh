@@ -25,8 +25,7 @@ void printf(const char *str)
 namespace firmware
 {
 
-	// bütün tablolar varsa sıralama
-	// bu şekilde gitmekedir ardışık ola
+
 	enum SmBiosType  : char
 	{
 		BIOS_Information      =0,    
