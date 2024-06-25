@@ -1,3 +1,6 @@
+/* 
+ * Copyright (c) 2024 Ali PİÇAKCI. All rights reserved.
+*/
 #ifndef FIRMWRAE_SM_BIOS
 #define FIRMWRAE_SM_BIOS
 
