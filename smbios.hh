@@ -4,8 +4,8 @@
 #ifndef FIRMWRAE_SM_BIOS
 #define FIRMWRAE_SM_BIOS
 
-// bunu g++ derleyicisi kendisi sağlar
-// bu başlık dosyası için endişe etmenize gerek yok
+// the g++ compiler provides this itself
+//no need to worry about this header file
 #include <stdint.h>
 
 
@@ -16,7 +16,7 @@
 template<typename T>
 void _printf(const char *format, T args...)
 {
-	// buraya kendi printf nizi implemente edin
+	//Implement your own printf here
 }
 void printf(const char *str)
 {
