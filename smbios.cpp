@@ -81,7 +81,6 @@ namespace firmware
 		}
 		return type;
 	}
-
 	char * SMBIOS::string_start()
 	{
 		return this->_str_start;

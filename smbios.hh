@@ -171,7 +171,6 @@ namespace firmware
 
 	}__attribute__((packed));
 
-
 	class SMBIOS
 	{
 		private:
