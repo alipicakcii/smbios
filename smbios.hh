@@ -1,22 +1,21 @@
-/* 
+/*
  * Copyright (c) 2024 Ali PİÇAKCI. All rights reserved.
-*/
+ */
 #ifndef FIRMWRAE_SM_BIOS
 #define FIRMWRAE_SM_BIOS
 
 // the g++ compiler provides this itself
-//no need to worry about this header file
+// no need to worry about this header file
 #include <stdint.h>
 
-
 #define size_t unsigned int
-#define START_ADDR 				0x000F0000
-#define END_ADDR 				0x000FFFFF
+#define START_ADDR 0x000F0000
+#define END_ADDR 0x000FFFFF
 
-template<typename T>
+template <typename T>
 void _printf(const char *format, T args...)
 {
-	//Implement your own printf here
+	// Implement your own printf here
 }
 void printf(const char *str)
 {
@@ -25,18 +24,16 @@ void printf(const char *str)
 namespace firmware
 {
 
-
-	enum SmBiosType  : char
+	enum SmBiosType : char
 	{
-		BIOS_Information      =0,    
-		System_Information    =1,  
-		System_Enclosure      =3,
-		Processor_Information =4, 
-		Cache_Information     =7,
-		
+		BIOS_Information = 0,
+		System_Information = 1,
+		System_Enclosure = 3,
+		Processor_Information = 4,
+		Cache_Information = 7,
 
-		inactive	      =126,
-		End_of_Table          =127
+		inactive = 126,
+		End_of_Table = 127
 	};
 
 	struct Eps
@@ -56,42 +53,38 @@ namespace firmware
 		uint16_t number;
 		uint8_t bcd_revision;
 
+	} __attribute__((packed));
 
-	}__attribute__((packed));
+	struct SMBIOSHeader
+	{
 
-
-	
-	struct SMBIOSHeader {
-		
 		uint8_t type;
 		uint8_t len;
 		uint16_t handle;
 
-	}__attribute__((packed));
-
+	} __attribute__((packed));
 
 	struct SmBiosStructure
 	{
 		SMBIOSHeader header;
 
-	}__attribute__((packed));
+	} __attribute__((packed));
 
-	struct BiosInformation 
+	struct BiosInformation
 		: public SmBiosStructure
 	{
-		uint8_t  vendor;
-		uint8_t  version;
+		uint8_t vendor;
+		uint8_t version;
 		uint16_t starting_addr;
-		uint8_t  release_date;
-		uint8_t  rom_size;
+		uint8_t release_date;
+		uint8_t rom_size;
 		uint64_t characteristics;
-		uint8_t  characteristics_ex;
+		uint8_t characteristics_ex;
 
-	}__attribute__((packed));
-
+	} __attribute__((packed));
 
 	struct SystemInformation
-		:public SmBiosStructure
+		: public SmBiosStructure
 	{
 		uint8_t manufacturer;
 		uint8_t product_name;
@@ -102,9 +95,7 @@ namespace firmware
 		uint8_t sku_number;
 		uint8_t family;
 
-
-
-	}__attribute__((packed));
+	} __attribute__((packed));
 
 	struct SystemEnclosure
 		: public SmBiosStructure
@@ -124,9 +115,7 @@ namespace firmware
 		uint8_t contained_element_count;
 		uint8_t contained_element_record_len;
 
-
-	}__attribute__((packed));
-
+	} __attribute__((packed));
 
 	struct ProcInformation
 		: public SmBiosStructure
@@ -150,54 +139,50 @@ namespace firmware
 		uint8_t asset_tag;
 		uint8_t part_number;
 
-	}__attribute__((packed));
+	} __attribute__((packed));
 
 	struct CacheInformation
-		:public  SmBiosStructure
+		: public SmBiosStructure
 	{
-		
+
 		uint8_t socket_dsesignation;
 		uint16_t cache_configuration;
 		uint16_t maximum_cache_size;
 		uint16_t installed_size;
 		uint16_t supported_sram_type;
 		uint16_t current_sram_type;
-		uint8_t  cahce_speed;
+		uint8_t cahce_speed;
 		uint8_t error_correction_type;
 		uint8_t system_cache_type;
 		uint8_t associativity;
 
-
-
-	}__attribute__((packed));
+	} __attribute__((packed));
 
 	class SMBIOS
 	{
-		private:
-			Eps*  _eps;
-			Eps*  find_eps();
-			char* _str_start;
-			char* _str_end;
-			int   _type_next_number;
-            SmBiosStructure * find_strtucte(SmBiosType table_type);
-		public:
-			SMBIOS(); 
-			Eps *get_eps(); 
-            
-            BiosInformation   *get_bios_information();
-            SystemInformation *get_system_information();
-            SystemEnclosure   *get_enclosure_information();
-            ProcInformation   *get_cpu_information();
+	private:
+		Eps *_eps;
+		Eps *find_eps();
+		char *_str_start;
+		char *_str_end;
+		int _type_next_number;
+		SmBiosStructure *find_strtucte(SmBiosType table_type);
 
-			size_t smbios_struct_len(SMBIOSHeader *hd);
-			void print_string();
-			SmBiosStructure * next_structure();
-			char * string_start();
-			char * string_end();
-			
-		
+	public:
+		SMBIOS();
+		Eps *get_eps();
+
+		BiosInformation *get_bios_information();
+		SystemInformation *get_system_information();
+		SystemEnclosure *get_enclosure_information();
+		ProcInformation *get_cpu_information();
+
+		size_t smbios_struct_len(SMBIOSHeader *hd);
+		void print_string();
+		SmBiosStructure *next_structure();
+		char *string_start();
+		char *string_end();
 	};
 }
-
 
 #endif
