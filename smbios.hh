@@ -9,7 +9,7 @@
 #include <stdint.h>
 
 
-
+#define size_t unsigned int
 #define START_ADDR 				0x000F0000
 #define END_ADDR 				0x000FFFFF
 
@@ -171,6 +171,7 @@ namespace firmware
 
 	}__attribute__((packed));
 
+
 	class SMBIOS
 	{
 		private:
@@ -179,9 +180,16 @@ namespace firmware
 			char* _str_start;
 			char* _str_end;
 			int   _type_next_number;
+            SmBiosStructure * find_strtucte(SmBiosType table_type);
 		public:
 			SMBIOS(); 
-			Eps *get_eps();
+			Eps *get_eps(); 
+            
+            BiosInformation   *get_bios_information();
+            SystemInformation *get_system_information();
+            SystemEnclosure   *get_enclosure_information();
+            ProcInformation   *get_cpu_information();
+
 			size_t smbios_struct_len(SMBIOSHeader *hd);
 			void print_string();
 			SmBiosStructure * next_structure();
