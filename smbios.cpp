@@ -39,13 +39,13 @@ namespace firmware
 
 			while(*this->_str_start == '\0')
 			{
-				printf(" ");
+				kprintf(" ");
 				this->_str_start++;
 
 			}
 	
 			char c = *this->_str_start++;
-			_printf("%c", c);
+			_kprintf("%c", c);
 		}
 	}
 
@@ -81,6 +81,7 @@ namespace firmware
 		}
 		return type;
 	}
+
 	char * SMBIOS::string_start()
 	{
 		return this->_str_start;
@@ -91,34 +92,6 @@ namespace firmware
 		return this->_str_end;
 	}
 	
-	Eps * SMBIOS::find_eps()
-	{
-		char *_start = (char*)START_ADDR;
-		char *_end = (char*)END_ADDR;
-		bool checksum = false;
-		while((uint32_t)_start < (uint32_t)_end)
-		{
-			if (
-					_start[0] == '_' &&
-					_start[1] == 'S' &&
-					_start[2] == 'M' &&
-					_start[3] == '_' 
-
-			   )
-			{
-				checksum = true;
-				break;
-			}
-			_start++;
-		}
-		if (!checksum)return nullptr;
-		return reinterpret_cast<Eps*>(_start);
-	}
-	Eps * SMBIOS::get_eps()
-	{
-		
-		return this->_eps;
-	}
 	Eps * SMBIOS::find_eps()
 	{
 		char *_start = (char*)START_ADDR;
@@ -201,6 +174,4 @@ namespace firmware
             auto ptr = this->find_strtucte(SmBiosType::Processor_Information);
             return static_cast<ProcInformation*>(ptr);
     }
-	
-	
 }
