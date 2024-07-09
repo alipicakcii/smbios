@@ -56,13 +56,13 @@ namespace firmware
 		SmBiosStructure  * type = reinterpret_cast<SmBiosStructure *>(this->_eps->structure_table_address);
 
 
-		char *buf;
-		char  buf_len;
+		char *ptr;
+		char  _len;
 		for (int i  = 0; i < this->_type_next_number; i++)
 		{
 			buf_len = this->smbios_struct_len(& type->header);
-			buf     = ((char*) type + buf_len);
-			type    =  reinterpret_cast<SmBiosStructure*>(buf);
+			ptr     = ((char*) type + _len);
+			type    =  reinterpret_cast<SmBiosStructure*>(ptr);
 		}
 
 
@@ -155,8 +155,8 @@ Eps * SMBIOS::find_eps()
             if (this->_eps == nullptr) return nullptr;
 
             SmBiosStructure  * type = reinterpret_cast<SmBiosStructure *>(this->_eps->structure_table_address);
-            char *buf;
-            char  buf_len;
+            char *ptr;
+            char  _len;
 
 
             while(true)
@@ -164,9 +164,9 @@ Eps * SMBIOS::find_eps()
 
                     if (type->header.type ==  table_type) break;
                     if (type == nullptr) break;
-                    buf_len = this->smbios_struct_len(& type->header);
-                    buf     = ((char*) type + buf_len);
-                    type    =  reinterpret_cast<SmBiosStructure*>(buf);
+                    _len = this->smbios_struct_len(& type->header);
+                    ptr     = ((char*) type + _len);
+                    type    =  reinterpret_cast<SmBiosStructure*>(ptr);
                     if (type->header.type >= 126)  break;
 
             }
