@@ -119,7 +119,7 @@ namespace firmware
 		
 		return this->_eps;
 	}
-Eps * SMBIOS::find_eps()
+	Eps * SMBIOS::find_eps()
 	{
 		char *_start = (char*)START_ADDR;
 		char *_end = (char*)END_ADDR;
