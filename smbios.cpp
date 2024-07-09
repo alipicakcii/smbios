@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2024 Ali PİÇAKCI. All rights reserved.
  */
-#include <smbios.hh>
+#include "smbios.hh"
 
 
 namespace firmware
